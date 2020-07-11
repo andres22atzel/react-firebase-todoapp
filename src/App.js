@@ -1,24 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { Button, FormControl, InputLabel, Input } from "@material-ui/core";
 
 function App() {
+  const [todos, setTodos] = useState([
+    "Take dogs for a walk",
+    "Take the rubbish out",
+    "qazi wants to live stream today",
+  ]);
+  const [input, setInput] = useState("");
+  console.log("🔫", input);
+  const addTodo = (event) => {
+    //this will fire off when click the button
+    event.preventDefault();
+    console.log("👽", "Im working!!!");
+    setTodos([...todos, input]);
+    setInput("");
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <h1>
+        Hello Clever Programmers{" "}
+        <span role="img" aria-label="Close">
+          🚀
+        </span>
+        !
+      </h1>
+      <form>
+        <FormControl>
+          <InputLabel>
+            <span role="img" aria-label="Close">
+              ✅
+            </span>{" "}
+            Write a Todo
+          </InputLabel>
+          <Input
+            type="text"
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+          />
+        </FormControl>
+
+        <Button
+          type="submit"
+          onClick={addTodo}
+          variant="contained"
+          color="primary"
+          disabled={!input}
         >
-          Learn React
-        </a>
-      </header>
+          Add Todo
+        </Button>
+      </form>
+      <ul>
+        {todos.map((todo) => (
+          <li>{todo}</li>
+        ))}
+      </ul>
     </div>
   );
 }
